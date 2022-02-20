@@ -1,0 +1,49 @@
+service: ${self:custom.appName}-lambda
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ap-northeast-1
+  profile: default
+  environment:
+    STAGE: ${self:provider.stage}
+    PREFIX: ${self:custom.appName}-${self:provider.stage}
+    VTUBER_ID_SEQUENCE: ${self:provider.environment.PREFIX}-vtuber-sequence
+    VTUBER_INFO_TABLE: ${self:provider.environment.PREFIX}-vtuber-info
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.PREFIX}*'
+custom:
+  defaultStage: dev
+  appName: vtuber-server
+plugins:
+  - serverless-webpack
+package:
+  individually: true
+  exclude:
+    - ./**
+functions:
+  getAllVtuberInfo:
+    handler: src/lambda/vtuber-info/handler.getAllVtuberInfo
+    # API Gatewayに関する設定
+    events:
+      - http:
+          path: getAllVtuberInfo
+          method: get
+          cors: true
+
+  putVtuberInfo:
+    handler: src/lambda/vtuber-info/handler.putVtuberInfo
+    # API Gatewayに関する設定
+    events:
+      - http:
+          path: putVtuberInfo
+          method: get
+          cors: true
