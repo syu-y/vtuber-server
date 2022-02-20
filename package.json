@@ -19,14 +19,14 @@
     "invoke:local:vtuber-info:putVtuberInfo": "LOCAL=true sls invoke local -f putVtuberInfo --path ./src/lambda/vtuber-info/data.json  -c ./src/lambda/serverless.yml",
     "invoke:aws": "echo ###### Invoke Lambda AWS ######",
     "invoke:aws:vtuber-info:getAllVtuberInfo": "sls invoke -f getAllVtuberInfo -c ./src/lambda/serverless.yml",
-    "invoke:aws:vtuber-info:putVtuberInfo": "sls invoke -f putVtuberInfo -c ./src/lambda/serverless.yml",
+    "invoke:aws:vtuber-info:putVtuberInfo": "sls invoke -f putVtuberInfo --path ./src/lambda/vtuber-info/data.json -c ./src/lambda/serverless.yml",
     "lambda": "echo ###### Deploy Lambda ######",
     "lambda:deploy:all": "sls deploy -c ./src/lambda/serverless.yml",
     "invoke:deploy:vtuber-info:getAllVtuberInfo": "sls deploy function -f getAllVtuberInfo -c ./src/lambda/serverless.yml",
     "invoke:deploy:vtuber-info:putVtuberInfo": "sls deploy function -f putVtuberInfo -c ./src/lambda/serverless.yml",
     "lambda:deploy:prod": "sls deploy --stage prod -c ./src/lambda/serverless.yml",
-    "lambda:rm": "sls remove -c ./src/app/lambda/serverless.yml",
-    "lambda:rm:prod": "sls remove --stage prod -c ./src/ambda/serverless.yml"
+    "lambda:rm": "sls remove -c ./src/lambda/serverless.yml",
+    "lambda:rm:prod": "sls remove --stage prod -c ./src/lambda/serverless.yml"
   },
   "dependencies": {
     "axios": "^0.26.0",
