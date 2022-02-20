@@ -1,0 +1,9 @@
+node_modules
+.serverless
+.dynamodb
+
+youtube.key.json
+twitter.key.json
+
+.vscode
+.webpack

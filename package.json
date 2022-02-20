@@ -1,0 +1,50 @@
+{
+  "name": "vtuber-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serverless:help": "serverless help",
+    "dynamoDB:local": "echo ###### DynamoDB Scripts ######",
+    "dynamodb:local:setup": "sls dynamodb install -c ./src/db/serverless.yml",
+    "dynamodb:local:start": "sls dynamodb start -c ./src/db/serverless.yml",
+    "dynamodb:local:list:table": "aws dynamodb list-tables --endpoint-url http://localhost:8082",
+    "dynamodb:local:scan:vtubersequence": "aws dynamodb scan --table-name vtuber-server-dev-vtuber-sequence --endpoint-url http://localhost:8082",
+    "dynamodb:local:scan:vtuberinfo": "aws dynamodb scan --table-name vtuber-server-dev-vtuber-info --endpoint-url http://localhost:8082",
+    "dynamodb:deploy": "sls deploy -c ./src/db/serverless.yml",
+    "dynamodb:deploy:prod": "sls deploy --stage prod -c ./src/db/serverless.yml",
+    "dynamodb:rm": "sls remove -c ./src/db/serverless.yml",
+    "dynamodb:rm:prod": "sls remove --stage prod -c ./src/db/serverless.yml",
+    "invoke": "echo ###### Invoke Lambda Local ######",
+    "invoke:local:vtuber-info:getAllVtuberInfo": "LOCAL=true sls invoke local -f getAllVtuberInfo -c ./src/lambda/serverless.yml",
+    "invoke:local:vtuber-info:putVtuberInfo": "LOCAL=true sls invoke local -f putVtuberInfo --path ./src/lambda/vtuber-info/data.json  -c ./src/lambda/serverless.yml",
+    "invoke:aws": "echo ###### Invoke Lambda AWS ######",
+    "invoke:aws:vtuber-info:getAllVtuberInfo": "sls invoke -f getAllVtuberInfo -c ./src/lambda/serverless.yml",
+    "invoke:aws:vtuber-info:putVtuberInfo": "sls invoke -f putVtuberInfo -c ./src/lambda/serverless.yml",
+    "lambda": "echo ###### Deploy Lambda ######",
+    "lambda:deploy:all": "sls deploy -c ./src/lambda/serverless.yml",
+    "invoke:deploy:vtuber-info:getAllVtuberInfo": "sls deploy function -f getAllVtuberInfo -c ./src/lambda/serverless.yml",
+    "invoke:deploy:vtuber-info:putVtuberInfo": "sls deploy function -f putVtuberInfo -c ./src/lambda/serverless.yml",
+    "lambda:deploy:prod": "sls deploy --stage prod -c ./src/lambda/serverless.yml",
+    "lambda:rm": "sls remove -c ./src/app/lambda/serverless.yml",
+    "lambda:rm:prod": "sls remove --stage prod -c ./src/ambda/serverless.yml"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.1",
+    "request-promise": "^4.2.6",
+    "serverless-http": "^2.7.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "aws-sdk": "^2.1077.0",
+    "babel-loader": "^8.1.0",
+    "dynamodb": "^1.3.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^8.5.0",
+    "serverless-webpack": "^5.6.1",
+    "webpack": "^5.69.1"
+  }
+}
