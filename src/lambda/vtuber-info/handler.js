@@ -56,7 +56,7 @@ export const putVtuberInfo = async (event, context, callback) => {
   const youtubeApiResponse = await youtubeApi.getChannelInfo(channelId);
   if (!youtubeApiResponse.data) return { statusCode: 500 };
   const allData = youtubeApiResponse.data.items[0];
-  const youtubeInfo = createYoutubeInfo(allData);
+  const youtubeInfo = createYoutubeInfo(channelId, allData);
   console.log(youtubeInfo);
 
   // Twitter情報を取得
@@ -83,8 +83,9 @@ export const putVtuberInfo = async (event, context, callback) => {
  * @param {*} responseData
  * @returns
  */
-const createYoutubeInfo = (responseData) => {
+const createYoutubeInfo = (channelId, responseData) => {
   const youtubeInfo = {
+    channelId,
     title: responseData.snippet.title,
     description: responseData.snippet.description,
     icon: responseData.snippet.thumbnails.default.url,
