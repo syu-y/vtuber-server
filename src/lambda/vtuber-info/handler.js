@@ -44,9 +44,11 @@ export const getAllVtuberInfo = async (event, context, callback) => {
  * @returns
  */
 export const putVtuberInfo = async (event, context, callback) => {
+  console.log('event : ' + event);
+  if (!event.queryStringParameters) return { statusCode: 500 };
   // ログ出力（パラメータ）
-  const channelId = event.channelId;
-  const twitterName = event.twitterName;
+  const channelId = event.queryStringParameters.channelId;
+  const twitterName = event.queryStringParameters.twitterName;
   console.log('channelId : ' + channelId);
   console.log('twitterName : ' + twitterName);
 

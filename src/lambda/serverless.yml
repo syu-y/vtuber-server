@@ -45,5 +45,5 @@ functions:
     events:
       - http:
           path: putVtuberInfo
-          method: get
+          method: post
           cors: true
