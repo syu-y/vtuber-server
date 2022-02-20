@@ -1,0 +1,5 @@
+{
+  "searchUsder": {
+    "endopoint": "https://api.twitter.com/2/users/by?usernames="
+  }
+}
