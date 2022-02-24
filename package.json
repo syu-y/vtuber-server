@@ -10,6 +10,7 @@
     "dynamodb:local:list:table": "aws dynamodb list-tables --endpoint-url http://localhost:8082",
     "dynamodb:local:scan:vtubersequence": "aws dynamodb scan --table-name vtuber-server-dev-vtuber-sequence --endpoint-url http://localhost:8082",
     "dynamodb:local:scan:vtuberinfo": "aws dynamodb scan --table-name vtuber-server-dev-vtuber-info --endpoint-url http://localhost:8082",
+    "dynamodb:local:scan:memberTypeMaster": "aws dynamodb scan --table-name vtuber-server-dev-member-type-master --endpoint-url http://localhost:8082",
     "dynamodb:deploy": "sls deploy -c ./src/db/serverless.yml",
     "dynamodb:deploy:prod": "sls deploy --stage prod -c ./src/db/serverless.yml",
     "dynamodb:rm": "sls remove -c ./src/db/serverless.yml",

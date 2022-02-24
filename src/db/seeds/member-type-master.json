@@ -1,0 +1,14 @@
+[
+  {
+    "memberTypeCd": "001",
+    "memberTypeName": "にじさんじ"
+  },
+  {
+    "memberTypeCd": "002",
+    "memberTypeName": "ホロライブ"
+  },
+  {
+    "memberTypeCd": "999",
+    "memberTypeName": "個人勢"
+  }
+]

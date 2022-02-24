@@ -10,6 +10,7 @@ provider:
     PREFIX: ${self:custom.appName}-${self:provider.stage}
     VTUBER_ID_SEQUENCE: ${self:provider.environment.PREFIX}-vtuber-sequence
     VTUBER_INFO_TABLE: ${self:provider.environment.PREFIX}-vtuber-info
+    MEMBER_TYPE_MASTER_TABLE: ${self:provider.environment.PREFIX}-member-type-master
 plugins:
   - serverless-dynamodb-local
 custom:
@@ -31,6 +32,10 @@ custom:
         sources:
           - table: ${self:provider.environment.VTUBER_INFO_TABLE}
             sources: [./src/db/seeds/vtuber-info.json]
+      memberTypeMaster:
+        sources:
+          - table: ${self:provider.environment.MEMBER_TYPE_MASTER_TABLE}
+            sources: [./src/db/seeds/member-type-master.json]
 resources:
   Resources:
     VtuberIdSequence:
@@ -55,6 +60,19 @@ resources:
             AttributeType: S
         KeySchema:
           - AttributeName: vtuberId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    MemberTypeMaster:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.MEMBER_TYPE_MASTER_TABLE}
+        AttributeDefinitions:
+          - AttributeName: memberTypeCd
+            AttributeType: S
+        KeySchema:
+          - AttributeName: memberTypeCd
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
