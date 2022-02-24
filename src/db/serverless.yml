@@ -56,10 +56,10 @@ resources:
       Properties:
         TableName: ${self:provider.environment.VTUBER_INFO_TABLE}
         AttributeDefinitions:
-          - AttributeName: vtuberId
+          - AttributeName: channelId
             AttributeType: S
         KeySchema:
-          - AttributeName: vtuberId
+          - AttributeName: channelId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
