@@ -10,6 +10,7 @@ provider:
     PREFIX: ${self:custom.appName}-${self:provider.stage}
     VTUBER_ID_SEQUENCE: ${self:provider.environment.PREFIX}-vtuber-sequence
     VTUBER_INFO_TABLE: ${self:provider.environment.PREFIX}-vtuber-info
+    MEMBER_TYPE_MASTER_TABLE: ${self:provider.environment.PREFIX}-member-type-master
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -38,7 +39,6 @@ functions:
           path: getAllVtuberInfo
           method: get
           cors: true
-
   putVtuberInfo:
     handler: src/lambda/vtuber-info/handler.putVtuberInfo
     # API Gatewayに関する設定
@@ -46,4 +46,12 @@ functions:
       - http:
           path: putVtuberInfo
           method: post
+          cors: true
+  getMemberTypes:
+    handler: src/lambda/vtuber-info/master.getMemberTypes
+    # API Gatewayに関する設定
+    events:
+      - http:
+          path: getMemberTypes
+          method: get
           cors: true

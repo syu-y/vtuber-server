@@ -7,3 +7,5 @@ twitter.key.json
 
 .vscode
 .webpack
+
+init_data/*

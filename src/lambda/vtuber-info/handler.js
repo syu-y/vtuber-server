@@ -47,10 +47,10 @@ export const putVtuberInfo = async (event, context, callback) => {
   console.log('event : ' + event);
   if (!event.queryStringParameters) return { statusCode: 500 };
   // ログ出力（パラメータ）
-  const channelId = event.queryStringParameters.channelId;
-  const twitterName = event.queryStringParameters.twitterName;
+  const { channelId, twitterName, memberTypeCd } = event.queryStringParameters;
   console.log('channelId : ' + channelId);
   console.log('twitterName : ' + twitterName);
+  console.log('memberTypeCd : ' + memberTypeCd);
 
   // Youtube情報を取得
   const youtubeApiResponse = await youtubeApi.getChannelInfo(channelId);
@@ -67,7 +67,7 @@ export const putVtuberInfo = async (event, context, callback) => {
 
   try {
     // DBに登録
-    await vtuberInfoRepository.putItem(youtubeInfo, twitterInfo);
+    await vtuberInfoRepository.putItem(youtubeInfo, twitterInfo, memberTypeCd);
   } catch (error) {
     console.log(error);
     return {
