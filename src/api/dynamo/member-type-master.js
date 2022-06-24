@@ -9,4 +9,16 @@ const getAllItems = () => {
   return documentClient.scan(params).promise();
 };
 
-export default { getAllItems };
+// 1件登録
+const putItem = async (memberTypeCd, memberTypeName) => {
+
+  const params = {
+    TableName: tableName,
+    Item: { memberTypeCd, memberTypeName },
+  };
+
+  console.log({ params });
+  return documentClient.put(params).promise();
+};
+
+export default { getAllItems, putItem };
